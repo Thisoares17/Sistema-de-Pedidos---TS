@@ -1,5 +1,5 @@
 // Versão original em JavaScript, ANTES da migração para TypeScript.
-// Mantida como evidência da etapa 5 (evolução e refatoração).
+// Mantida como evidência (evolução e refatoração).
 
 var produtos = [{ id: 1, nome: "Teclado", preco: "150.00", estoque: 5 }];
 var pedidos = [];
