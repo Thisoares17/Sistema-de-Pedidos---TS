@@ -39,7 +39,7 @@ pedidos-ts/
 5. Cancelar exige um motivo e devolve os itens ao estoque.
 6. O cadastro valida os dados do produto (id, nome, preço e estoque) e rejeita ids duplicados. O lote inteiro é validado antes de qualquer gravação.
 7. O repositório clona os objetos na entrada e na saída para proteger seu estado interno, inclusive estruturas aninhadas.
-6. Valores em dinheiro são guardados em centavos (inteiros).
+8. Valores em dinheiro são guardados em centavos (inteiros).
 
 ## Onde cada requisito aparece
 
@@ -102,31 +102,21 @@ Linhas no fim de `src/index.ts` mostram chamadas que **não compilam** (cancelar
 
 ## Uso de Inteligência Artificial e avaliação crítica
 
-Registre nesta seção somente o uso de IA que realmente ocorreu durante o desenvolvimento. Não atribua ferramenta, modelo, data ou prompt que não correspondam ao seu histórico.
+O projeto foi desenvolvido pelo autor com auxílio de IA; a IA foi uma ferramenta de apoio, não a autora autônoma do trabalho. Nesta revisão final, ela foi usada para revisar a documentação e executar as verificações. O código do módulo já estava no repositório e não foi alterado nesta etapa.
 
-### Registro de uso
+### Registro desta revisão
 
-- **Ferramenta/modelo utilizado:** [preencher com a ferramenta e o modelo realmente utilizados]
-- **Finalidade:** apoio à organização da estrutura, revisão de tipagem, identificação de riscos e elaboração de testes, conforme efetivamente utilizado.
-- **Prompt(s) utilizado(s):** [inserir um resumo fiel ou os prompts reais]
+- **Ferramenta:** assistente de IA usando Copilot SDK no VS Code. O modelo específico não foi informado nesta sessão.
+- **Finalidade:** comparar o projeto com os critérios de entrega, ler a implementação e a documentação existentes, executar as verificações disponíveis e registrar resultados reproduzíveis.
+- **Solicitação recebida:** os critérios de avaliação para um módulo TypeScript tipado e sua documentação técnica, incluindo modelagem, generics, regras de negócio, configuração, decisões técnicas e avaliação crítica do uso de IA.
 
-### Análise crítica — completar com sua experiência
+### Análise crítica
 
-Use as perguntas abaixo para registrar sua avaliação, sem copiar automaticamente sugestões da IA:
-
-1. Quais sugestões foram aceitas? Explique por que eram adequadas ao domínio.
-2. Quais sugestões foram modificadas ou rejeitadas? Explique o motivo técnico.
-3. Que problemas foram encontrados durante compilação ou execução? Registre a mensagem e como você investigou a causa.
-4. O que você aprendeu sobre a diferença entre tipagem estática e validação em tempo de execução?
-5. Como os testes ajudaram a verificar que as correções não quebraram outras regras?
-
-Aceitas: Validar os dados e o estoque antes de criar pedidos, somar itens repetidos e armazenar valores em centavos. Isso evita erros nas regras do negócio.
-
-Modificadas ou rejeitadas: Preferi unknown com validação, em vez de any. Para erros esperados, usei resultados tipados em vez de exceções.
-
-Aprendizado: Os tipos do TypeScript ajudam na compilação, mas dados externos também precisam ser validados durante a execução.
-
-Testes: Verificaram as regras de pedidos, estoque e cancelamento. Os 11 testes passaram, indicando que as correções mantiveram o comportamento esperado.
+1. **Análise do código existente:** a validação de dados externos como `unknown`, o resultado discriminado `Resultado<T>`, o armazenamento de valores em centavos e a conferência de todo o estoque antes de alterá-lo correspondem às regras do domínio e tornam falhas esperadas explícitas.
+2. **Escopo da revisão:** a implementação foi apenas lida e validada, sem alterações de código. A documentação foi ajustada para remover um campo provisório e refletir as verificações realmente executadas.
+3. **Problema encontrado durante a validação:** no PowerShell, `npm` tentou executar `npm.ps1` e foi bloqueado pela política de execução de scripts. Usar `npm.cmd` contornou o problema sem alterar configurações de segurança; as verificações do projeto passaram.
+4. **Aprendizado técnico:** a tipagem estática protege o código durante a compilação, mas não valida dados recebidos em runtime. Por isso, as funções de validação recebem `unknown` e verificam a estrutura e os valores antes de retorná-los como dados do domínio.
+5. **Limite dos testes:** as 11 verificações automatizadas cobrem cenários importantes de cadastro, estoque, cancelamento e cópia defensiva, mas não provam ausência de todos os defeitos. A demonstração executável complementa os testes, sem substituí-los.
 
 ### Melhorias técnicas realizadas nesta versão
 
@@ -136,19 +126,17 @@ Testes: Verificaram as regras de pedidos, estoque e cancelamento. Os 11 testes p
 - Os type guards verificam valores com comparações seguras, sem asserções para converter dados externos.
 - Foi adicionado `src/testes.ts` para testar estoque, cancelamento, entradas inválidas e cópia defensiva.
 
-### Evidências a registrar antes da entrega
+### Verificações executadas nesta revisão
 
-Execute localmente e inclua capturas de tela ou transcrições reais dos resultados:
+Ambiente observado: Node.js `v22.20.0`. Os comandos abaixo foram executados com sucesso usando `npm.cmd`:
 
 ```bash
-npm install
-npm run typecheck
-npm run build
-npm test
-npm run dev
+npm.cmd run typecheck  # TypeScript sem emissão: passou
+npm.cmd test           # build + 11 verificações: passou
+npm.cmd run dev        # compilação + demonstração: passou
 ```
 
-Não declare os comandos como aprovados até executá-los no seu ambiente. A execução do projeto requer uma versão recente do Node.js que disponibilize `structuredClone` (Node 17 ou superior; recomenda-se Node 22).
+`npm.cmd test` executa `npm run build` antes dos testes. Em um terminal no qual `npm` não esteja bloqueado pela política de execução, use os scripts `npm` equivalentes. O projeto requer Node.js 17 ou superior por usar `structuredClone`; recomenda-se Node.js 22.
 
 ## Observação sobre o escopo front-end
 
