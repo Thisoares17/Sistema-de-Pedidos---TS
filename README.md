@@ -120,6 +120,14 @@ Use as perguntas abaixo para registrar sua avaliação, sem copiar automaticamen
 4. O que você aprendeu sobre a diferença entre tipagem estática e validação em tempo de execução?
 5. Como os testes ajudaram a verificar que as correções não quebraram outras regras?
 
+Aceitas: Validar os dados e o estoque antes de criar pedidos, somar itens repetidos e armazenar valores em centavos. Isso evita erros nas regras do negócio.
+
+Modificadas ou rejeitadas: Preferi unknown com validação, em vez de any. Para erros esperados, usei resultados tipados em vez de exceções.
+
+Aprendizado: Os tipos do TypeScript ajudam na compilação, mas dados externos também precisam ser validados durante a execução.
+
+Testes: Verificaram as regras de pedidos, estoque e cancelamento. Os 11 testes passaram, indicando que as correções mantiveram o comportamento esperado.
+
 ### Melhorias técnicas realizadas nesta versão
 
 - O estoque agora é validado pela quantidade total por produto, evitando que linhas repetidas ultrapassem o estoque disponível.
