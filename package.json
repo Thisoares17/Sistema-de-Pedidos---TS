@@ -1,0 +1,17 @@
+{
+  "name": "pedidos-ts",
+  "version": "1.0.0",
+  "description": "Módulo de sistema de pedidos tipado em TypeScript",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js",
+    "dev": "tsc && node --enable-source-maps dist/index.js",
+    "test": "npm run build && node --enable-source-maps dist/testes.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}

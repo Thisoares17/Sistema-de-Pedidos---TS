@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    // Alvo moderno: Node 22 suporta ES2022 nativamente
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "types": ["node"],
+
+    "rootDir": "src",
+    "outDir": "dist",
+
+    // Depuração: mapeia o JS gerado de volta para o .ts
+    "sourceMap": true,
+
+    // Segurança de tipos
+    "strict": true,
+    "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Consistência
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
